@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
+import CustomTitleBarComp from '../comp/CustomTitleBarComp';
 import {
-    View, Text
+    View, Text, StyleSheet
 } from 'react-native';
 
 class AboutPage extends Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         return (
-             <View>
+             <View style={styles.container}>
+                <CustomTitleBarComp
+                    title="关于"
+                    onLeftBtnClick={() => {this.props.navigator.pop()}}
+                    />
                 <Text>about page</Text>
              </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: { flex: 1, backgroundColor: 'red'}
+});
 
 export default AboutPage;

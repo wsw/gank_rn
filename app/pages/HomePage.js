@@ -17,7 +17,6 @@ class HomePage extends Component {
     }
 
     render() {
-        console.log(GankListComp)
         return (
             <View style={styles.container}>
                 <CustomTitleBarComp 
@@ -26,7 +25,7 @@ class HomePage extends Component {
                     onLeftBtnClick={this.props.onDrawerMenuToggle}
                     isMainPage={true}
                     rightText="关于"
-                    onRightBtnClick={() => this.props.navigator.push({componet: AboutPage})}>
+                    onRightBtnClick={this._onRightBtnClick.bind(this)}>
                     <CustomTitleBarComp.HeaderTabItem 
                         tabText={'android'}
                         selected={this.props.selectedTabIndex == 0}
@@ -69,16 +68,18 @@ class HomePage extends Component {
         
         
     }
+    _onRightBtnClick() {
+        console.log('click right');
+        this.props.navigator.jumpTo({component: AboutPage})
+    }
 
     _switchTitleBar(selIndex) {
-        console.log('tab', new Date());
         if (this.props.selectedTabIndex !== selIndex) {
             this.props.dispatch(switchTitleBarTab(selIndex));
         }
     }
 
     _onViewPageScroll(offset) {
-        console.log('scroll', new Date())
         this.refs.titleBar.onPageScroll(offset);
     }
 }

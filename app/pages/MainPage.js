@@ -67,7 +67,6 @@ class MainPage extends Component {
     }
     
     _renderScene(route, navigator) {
-        console.log(route);
         var { component:Component, ...route} = route;
         return (
             <Component 
