@@ -69,8 +69,7 @@ class HomePage extends Component {
         
     }
     _onRightBtnClick() {
-        console.log('click right');
-        this.props.navigator.jumpTo({component: AboutPage})
+        this.props.navigator.push({component: AboutPage})
     }
 
     _switchTitleBar(selIndex) {

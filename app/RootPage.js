@@ -8,6 +8,7 @@ import {
     View, BackAndroid, Platform
 } from 'react-native';
 import MainPage from './pages/MainPage';
+import {showToast} from './comp/CommonComp';
 
 class RootPage extends Component {
     
@@ -68,7 +69,7 @@ class RootPage extends Component {
 
     _onBack() {
         for (let i = this.backButtonListeners.length-1; i>=0; i--) {
-            if (this.backButtonListeners[i]()) return ture;
+            if (this.backButtonListeners[i]()) return true;
         }
 
         let navigator = this.navigator;
@@ -83,15 +84,16 @@ class RootPage extends Component {
         if (this.extTimestamp !== undefined && curTimestamp - this.extTimestamp < 3000) {
             return false;
         } else {
-            alert('再按一次退出App');
+            showToast('再按一次退出App');
             this.extTimestamp = curTimestamp;
             return true;
         }
     }
 
     _renderScene(route, navigator) {
+        console.log(route);
         if (route && route.component) {
-            var {Component, ...route} = route;
+            var {component: Component, ...route} = route;
             return <Component navigator={navigator} {...route} />
         }
         return <MainPage navigator={navigator} {...route} />

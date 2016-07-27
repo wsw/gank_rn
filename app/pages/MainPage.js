@@ -119,7 +119,6 @@ class MainPage extends Component {
     }
 
     _renderDrawerMenuView() {
-        console.log(2);
         // return <DrawerMenuComp tab={this.props.tab} onTabSelect={(tab) => this._onTabSelect.bind(this, tab)} />;
         return <View><Text>{this.props.tab}</Text></View>
     }

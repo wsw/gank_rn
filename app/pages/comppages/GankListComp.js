@@ -7,12 +7,13 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-// import webviewPage from '../webviewPage';
+import WebViewPage from '../WebViewPage';
 import CommonTouchableComp from '../../comp/CommonTouchableComp';
 import CommonLoadView from '../../comp/CommonLoadView';
 import { FETCH_GANK_DATA_STATUS } from '../../actions/types';
 import { fetchGankList } from '../../actions/gankApi';
 import { COMMON_BACKGROUND_COLOR } from '../../GlobalConst';
+import { showToast } from '../../comp/CommonComp';
 
 class GankListComp extends Component {
     constructor(props) {
@@ -37,10 +38,10 @@ class GankListComp extends Component {
             return false;
         } else if (nextProps.status === FETCH_GANK_DATA_STATUS.FAILURE) {
             if (nextProps.opt === 1) {
-                alert('刷新数据失败了');
+                showToast('刷新数据失败了');
                 return false;
             } else if (nextProps.opt === 2) {
-                alert('加载更多数据失败了');
+                showToast('加载更多数据失败了');
                 this.isLoadMoreing = false;
                 return false;
             }
@@ -97,7 +98,7 @@ class GankListComp extends Component {
         this.props.dispatch({type: FETCH_GANK_DATA_STATUS.INITIALIZE, ext: this.tagName});
         // 延迟2秒再调用数据
         setTimeout(() => {
-        this._fetchData(0);
+            this._fetchData(0);
         }, 2000)
     }
     
@@ -127,6 +128,7 @@ class GankListComp extends Component {
     }
     
     _onItemViewPress(gankData) {
+        console.log(gankData);
         this.props.navigator.push({
             component: WebViewPage,
             title: gankData.desc,
